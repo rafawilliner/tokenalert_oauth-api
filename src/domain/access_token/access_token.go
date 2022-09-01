@@ -2,7 +2,7 @@ package access_token
 
 import (
 	"time"
-	"github.com/rafawilliner/tokenalert_utils-go/rest_errors"
+	"github.com/rafawilliner/tokenalert_utils-go/src/rest_errors"
 	"strings"
 	"github.com/rafawilliner/tokenalert_oauth-api/src/utils/crypto_utils"
 	"fmt"
@@ -44,10 +44,10 @@ func (at *AccessTokenRequest) Validate() rest_errors.RestErr {
 }
 
 type AccessToken struct {
-	AccessToken string `json:"access_token"`
-	UserId      int64  `json:"user_id"`
-	ClientId    int64  `json:"client_id,omitempty"`
-	Expires     int64  `json:"expires"`
+	AccessToken string `bson:"access_token"`
+	UserId      int64  `bson:"user_id"`
+	ClientId    int64  `bson:"client_id,omitempty"`
+	Expires     int64  `bson:"expires"`
 }
 
 func (at *AccessToken) Validate() rest_errors.RestErr {
