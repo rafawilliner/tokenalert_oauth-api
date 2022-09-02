@@ -25,7 +25,7 @@ type accessTokenRepositoryInterface interface {
 func (a *accessTokenRepository) GetById(access_token_id string) (*access_token.AccessToken, rest_errors.RestErr) {
 
 	var accessToken *access_token.AccessToken
-	var accessTokenCollection *mongo.Collection = access_token_db.GetCollection(access_token_db.DB, "access_token")
+	var accessTokenCollection *mongo.Collection = access_token_db.GetCollection("access_token")
 	filter := bson.D{{Key: "access_token", Value: access_token_id}}
 	err := accessTokenCollection.FindOne(context.TODO(), filter).Decode(&accessToken)
 	if err != nil {
