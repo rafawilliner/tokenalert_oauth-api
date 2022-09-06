@@ -6,4 +6,5 @@ import (
 
 func mapUrls() {
 	router.GET("/access_token/:access_token_id", access_token.GetById)
+	router.POST("/access_token/", access_token.Create)
 }

@@ -1,4 +1,4 @@
-package repositories
+package db
 
 import (
 	"context"
@@ -20,6 +20,7 @@ type accessTokenRepository struct{}
 
 type accessTokenRepositoryInterface interface {
 	GetById(string) (*access_token.AccessToken, rest_errors.RestErr)
+	Create(access_token.AccessTokenRequest) rest_errors.RestErr
 }
 
 func (a *accessTokenRepository) GetById(access_token_id string) (*access_token.AccessToken, rest_errors.RestErr) {
@@ -38,4 +39,15 @@ func (a *accessTokenRepository) GetById(access_token_id string) (*access_token.A
 	}
 
 	return accessToken, nil
+}
+
+func (a *accessTokenRepository) Create(atr access_token.AccessTokenRequest) rest_errors.RestErr {
+	var accessTokenCollection *mongo.Collection = access_token_db.GetCollection("access_token")
+	_, err := accessTokenCollection.InsertOne(context.TODO(), atr)
+	if err != nil {
+		logger.Error("error when trying to save new access token", err)
+			return rest_errors.NewInternalServerError("error fetching access token", errors.New("database error"))
+	}
+
+	return nil
 }

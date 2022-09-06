@@ -19,7 +19,7 @@ type AccessTokenRequest struct {
 	Scope     string `json:"scope"`
 
 	// Used for password grant type
-	Username string `json:"username"`
+	Email string `json:"email"`
 	Password string `json:"password"`
 
 	// Used for client_credentials grant type

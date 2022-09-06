@@ -12,5 +12,5 @@ var (
 func StartApplication() {
 	mapUrls()
 	access_token_db.InitDataBase()
-	router.Run(":8080")
+	router.Run(":8085")
 }
